@@ -8408,3 +8408,13 @@ body {
   cursor: pointer;
 }
 
+.img-circle {
+  border-radius: 50%;
+}
+
+/* User profile page */
+
+.users-show-page .user-info .thumbnail {
+  margin-bottom: 0px;
+}
+
