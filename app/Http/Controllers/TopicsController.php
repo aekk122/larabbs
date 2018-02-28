@@ -27,6 +27,8 @@ class TopicsController extends Controller
     public function show(Request $request, Topic $topic)
     {
     	// URL 矫正，即访问连接话题有 slug 时，一直带有 slug
+    	
+
     	if ( !empty($topic->slug) && $topic->slug != $request->slug) {
     		return redirect($topic->link(), 301);
     	}
