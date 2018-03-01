@@ -29,4 +29,8 @@ class ReplyObserver
     	//通知作者话题被回复
     	$topic->belongsToUser->notify(new TopicReplied($reply));
     }
+
+    public function deleted(Reply $reply) {
+        $reply->belongsToTopic->decrement('reply_count', 1);
+    }
 }
