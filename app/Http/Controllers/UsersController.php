@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;
 use Auth;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,6 @@ class UsersController extends Controller
     }
     
     public function show(User $user) {
-
     	return view('users.show', compact('user'));
     }
 
