@@ -9,6 +9,7 @@ use App\Http\Requests\TopicRequest;
 use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
+use App\Models\User;
 
 class TopicsController extends Controller
 {
@@ -17,11 +18,16 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index(Request $request, Topic $topic)
-	{
+    //此处的 User $user，只是便捷的 $user = new User 的写法。
+	public function index(Request $request, Topic $topic, User $user)
+	{		
 		
 		$topics = $topic->withOrder($request->order)->paginate(30);
-		return view('topics.index', compact('topics'));
+
+		//活跃用户
+		$active_users = $user->getActiveUsers();
+		// dd($active_users);
+		return view('topics.index', compact('topics', 'active_users'));
 	}
 
     public function show(Request $request, Topic $topic)
