@@ -42,6 +42,7 @@ class UsersTableSeeder extends Seeder
        	$user->name = 'WENHAO';
        	$user->email = '460905539@qq.com';
        	$user->password = bcrypt('aekk122');
+        $user->activated = true;
        	$user->save();
 
         //初始化用户角色，将 1 号用户指派为 【站长】

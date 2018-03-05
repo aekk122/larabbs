@@ -28,7 +28,7 @@ trait LastActivedAtHelper {
 
 	public function syncUserActivedAt() {
 		//获取昨日的哈希表名称，格式如：larabbs_last_actived_at_2017-10-20
-		$hash = $this->getHashFromDateString(Carbon::now()->subDays()->toDateString());
+		$hash = $this->getHashFromDateString(Carbon::now()->subDay()->toDateString());
 
 		//从 Redis 中获取所有哈希表里的数据
 		$dates = Redis::hGetAll($hash);

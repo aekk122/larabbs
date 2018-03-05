@@ -24,5 +24,6 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'introduction' => $faker->sentence(),
         'created_at' => $now,
         'updated_at' => $now,
+        'activated' => true,
     ];
 });

@@ -14,6 +14,7 @@
 						<hr>
 						<h4><strong>个人简介</strong></h4>
 						<p>{{ $user->introduction }}</p>
+						@include('users._stats')
 						<hr>
 						<h4><strong>注册于</strong></h4>
 						<p>{{ $user->created_at->diffForHumans() }}</p>
@@ -45,9 +46,14 @@
 					<li class="{{ active_class(if_query('tab', 'replies')) }}">
 						<a href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}">Ta 的回复</a>
 					</li>
+					<li class="{{ active_class(if_query('tab', 'follows'))}}">
+						<a href="{{ route('users.show', [$user->id, 'tab' => 'follows'])}}">Ta 的关注</a>
+					</li>
 				</ul>
 				@if (if_query('tab', 'replies'))
 					@include('users._replies', ['replies' => $user->hasManyReplies()->with('belongsToTopic')->recent()->paginate(5)])
+				@elseif (if_query('tab', 'follows'))
+					@include('users._follows', ['follows' => $user->hasManyFollows])
 				@else
 					@include('users._topics', ['topics' => $user->hasManyTopics()->recent()->paginate(5)])
 				@endif
