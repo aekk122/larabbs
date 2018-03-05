@@ -10,6 +10,7 @@ use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\User;
+use App\Models\Link;
 
 class TopicsController extends Controller
 {
@@ -19,15 +20,17 @@ class TopicsController extends Controller
     }
 
     //此处的 User $user，只是便捷的 $user = new User 的写法。
-	public function index(Request $request, Topic $topic, User $user)
+	public function index(Request $request, Topic $topic, User $user, Link $link)
 	{		
 		
 		$topics = $topic->withOrder($request->order)->paginate(30);
 
 		//活跃用户
 		$active_users = $user->getActiveUsers();
+		//推荐资源
+		$links = $link->getAllCached();
 		// dd($active_users);
-		return view('topics.index', compact('topics', 'active_users'));
+		return view('topics.index', compact('topics', 'active_users', 'links'));
 	}
 
     public function show(Request $request, Topic $topic)
