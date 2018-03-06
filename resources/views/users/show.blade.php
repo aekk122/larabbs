@@ -9,6 +9,9 @@
 				<div class="media">
 					<div align="center">
 						<img src="{{ $user->avatar }}" alt="" class="thumbnail img-responsive" width="300px" height="300px">
+						@if (Auth::check())
+							@include('users._follow_form')
+						@endif
 					</div>
 					<div class="media-body">
 						<hr>
