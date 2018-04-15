@@ -65,7 +65,7 @@ $api->version('v1', [
 		'expiers' => config('api.rate_limits.access.expires'),
 	], function ($api) {
 		// 游客可以访问的接口
-		
+
 		$api->get('categories', 'CategoriesController@index')
 			->name('api.categories.index');
 		// 所有话题列表
@@ -105,6 +105,10 @@ $api->version('v1', [
 			// 删除话题
 			$api->delete('topics/{topic}', 'TopicsController@destroy')
 				->name('api.topics.destroy');
+
+			// 发布回复
+			$api->post('topics/{topic}/replies', 'RepliesController@store')
+				->name('api.topics.replies.store');
 		});
 	});
 });
