@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Transformers\TopicTransformer;
 use App\Http\Requests\Api\TopicRequest;
+use App\Models\User;
 
 class TopicsController extends Controller
 {
@@ -32,5 +33,27 @@ class TopicsController extends Controller
 
     	$topic->delete();
     	return $this->response->noContent();
+    }
+
+    public function index(Request $request, Topic $topic) {
+    	$query = $topic->query();
+
+    	// 判断是否给出分类 ID
+    	if ($categoryId = $request->category_id) {
+    		$query->where('category_id', $categoryId);
+    	}
+
+    	// 判断是否需要排序
+    	$query->withOrder($request->order);
+
+    	$topics = $query->paginate(20);
+
+    	return $this->response->paginator($topics, new TopicTransformer());
+    }
+
+    public function userIndex( Request $request, User $user) {
+    	$topics = $user->hasManyTopics()->recent()->paginate(20);
+
+    	return $this->response->paginator($topics, new TopicTransformer());
     }
 }
