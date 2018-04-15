@@ -51,9 +51,13 @@ class TopicsController extends Controller
     	return $this->response->paginator($topics, new TopicTransformer());
     }
 
-    public function userIndex( Request $request, User $user) {
+    public function userIndex(Request $request, User $user) {
     	$topics = $user->hasManyTopics()->recent()->paginate(20);
 
     	return $this->response->paginator($topics, new TopicTransformer());
+    }
+
+    public function show(Topic $topic) {
+    	return $this->response->item($topic, new TopicTransformer());
     }
 }

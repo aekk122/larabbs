@@ -65,14 +65,20 @@ $api->version('v1', [
 		'expiers' => config('api.rate_limits.access.expires'),
 	], function ($api) {
 		// 游客可以访问的接口
+		
 		$api->get('categories', 'CategoriesController@index')
 			->name('api.categories.index');
-
+		// 所有话题列表
 		$api->get('topics', 'TopicsController@index')
 			->name('api.topics.index');
 
+		// 某个用户话题列表
 		$api->get('users/{user}/topics', 'TopicsController@userIndex')
 			->name('api.users.topics.index');
+
+		// 话题详情
+		$api->get('topics/{topic}', 'TopicsController@show')
+			->name('api.topics.show');
 
 		// 需要 Token 验证访问的接口
 		$api->group(['middleware' => 'api.auth'], function ($api) {

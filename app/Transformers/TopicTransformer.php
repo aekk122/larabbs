@@ -7,7 +7,7 @@ use League\Fractal\TransformerAbstract;
 
 class TopicTransformer extends TransformerAbstract {
 
-	protected $availableIncludes = ['belongsToUser', 'belongsToCategory'];
+	protected $availableIncludes = ['belongsToUser', 'belongsToCategory', 'hasManyReplies'];
 
 	public function transform(Topic $topic) {
 		return [
@@ -32,5 +32,9 @@ class TopicTransformer extends TransformerAbstract {
 
 	public function includeBelongsToCategory(Topic $topic) {
 		return $this->item($topic->belongsToCategory, new CategoryTransformer());
+	}
+
+	public function includeHasManyReplies(Topic $topic) {
+		return $this->collection($topic->hasManyReplies, new ReplyTransformer());
 	}
 }
