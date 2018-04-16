@@ -21,4 +21,6 @@ class NotificationsController extends Controller
     	
     	return view('notifications.index', compact('notifications'));
     }
+
+   
 }
