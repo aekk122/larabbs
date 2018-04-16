@@ -7,6 +7,7 @@ use App\Models\Reply;
 use App\Http\Requests\ReplyRequest;
 use App\Transformers\ReplyTransformer;
 use App\Models\Topic;
+use App\Models\User;
 
 class RepliesController extends Controller
 {
@@ -28,5 +29,15 @@ class RepliesController extends Controller
     	$reply->delete();
 
     	return $this->response->noContent();
+    }
+
+    public function index(Topic $topic) {
+    	$replies = $topic->hasManyReplies()->paginate(20);
+    	return $this->response->paginator($replies, new ReplyTransformer());
+    }
+
+    public function userIndex(User $user) {
+    	$replies = $user->hasManyReplies()->paginate(20);
+    	return $this->response->paginator($replies, new ReplyTransformer());
     }
 }
