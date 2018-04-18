@@ -57,6 +57,7 @@ $api->version('v1', [
 		// 删除 Token
 		$api->delete('authorizations/current', 'AuthorizationsController@destroy')
 			->name('api/authorizations.destroy');
+
 	});
 
 	$api->group([
@@ -87,6 +88,10 @@ $api->version('v1', [
 		// 话题详情
 		$api->get('topics/{topic}', 'TopicsController@show')
 			->name('api.topics.show');
+
+		// 资源推荐
+		$api->get('links', 'LinksController@index')
+			->name('api.links.index');
 
 		// 需要 Token 验证访问的接口
 		$api->group(['middleware' => 'api.auth'], function ($api) {
