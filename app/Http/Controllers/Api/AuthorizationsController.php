@@ -55,7 +55,8 @@ class AuthorizationsController extends Controller
     					'weixin_unionid' => $unionid,
     				]);
     			}
-
+                
+                
     			break;
     	}
 
