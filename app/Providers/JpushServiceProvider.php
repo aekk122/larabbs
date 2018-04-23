@@ -3,8 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Jpush\Client;
-
+use JPush\Client;
 class JpushServiceProvider extends ServiceProvider
 {
     /**
@@ -25,7 +24,8 @@ class JpushServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Client::class, function ($app) {
-            return new Client(config('jpush'));
+            $config = config('jpush');
+            return new Client($config['key'], $config['secret']);
         });
 
         $this->app->alias(Client::class, 'jpush');

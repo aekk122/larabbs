@@ -5,9 +5,9 @@ namespace App\Listeners;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\DatabaseNotification;
-use Jpush\Client;
+use JPush\Client;
 
-class PushNotification
+class PushNotification implements ShouldQueue
 {
 
     protected $client;
@@ -46,7 +46,7 @@ class PushNotification
         $this->client->push()
             ->setPlatform('all')
             ->addRegistrationId($user->registration_id)
-            ->setNotificationAlert(strip_tags($notification->data['reply_count']))
+            ->setNotificationAlert(strip_tags($notification->data['reply_content']))
             ->send();
     }
 }
