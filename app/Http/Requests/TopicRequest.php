@@ -10,16 +10,28 @@ class TopicRequest extends Request
         {
             // CREATE
             case 'POST':
-            // UPDATE
-            case 'PUT':
-            case 'PATCH':
-            {
-                return [
+            return [
                     'title' => 'required|min:2',
-                    'body' => 'required|min:3',
+                    'body' => 'required|min:10',
                     'category_id' => 'required|numeric',
                 ];
-            }
+                break;
+            // UPDATE
+            case 'PUT':
+            return [
+                    'title' => 'required|min:2',
+                    'body' => 'required|min:10',
+                    'category_id' => 'required|numeric',
+                ];
+                break;
+            case 'PATCH':
+            
+                return [
+                    'title' => 'required|min:2',
+                    'body' => 'required|min:10',
+                    'category_id' => 'required|numeric',
+                ];
+                break;
             case 'GET':
             case 'DELETE':
             default:

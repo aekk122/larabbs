@@ -44,3 +44,5 @@ Route::get('permission-denied', 'PagesController@permissionDenied')->name('permi
 
 Route::post('users/{user}/follow', 'FollowersController@store')->name('follow');
 Route::delete('users/{user}/unfollow', 'FollowersController@destroy')->name('unfollow');
+
+Route::post('search', 'SearchController@search')->name('search');

@@ -37,10 +37,11 @@ class TopicsController extends Controller
     {
     	// URL 矫正，即访问连接话题有 slug 时，一直带有 slug
     	
-
     	if ( !empty($topic->slug) && $topic->slug != $request->slug) {
     		return redirect($topic->link(), 301);
     	}
+
+    	$msg = \Session::get('success');
         return view('topics.show', compact('topic'));
     }
 
@@ -51,13 +52,12 @@ class TopicsController extends Controller
 	}
 
 	public function store(TopicRequest $request, Topic $topic)
-	{
-
+	{	
 		$topic->fill($request->all());
 		$topic->user_id = Auth::id();
 		$topic->save();
 		
-		return redirect()->to($topic->link())->with('success', '成功创建话题');
+		return redirect()->to($topic->link())->with('success', '创建成功');
 	}
 
 	public function edit(Topic $topic)
@@ -104,4 +104,6 @@ class TopicsController extends Controller
 		}
 		return $data;
 	}
+
+	
 }

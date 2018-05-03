@@ -38,6 +38,25 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+    	function search() {
+    		var content = $('#search').val();
+    		var token = '{{ csrf_token() }}';
+    		var formdata = {
+    			'content' : content,
+    			'_token' : token
+    		};
+    		$.ajax({
+    			method: 'POST',
+    			url: '{{ route('search') }}',
+    			data: formdata,
+				dataType: "json",
+				success: function(msg) {
+					console.log(msg);
+				}    			
+    		});
+    	}
+    </script>
     @yield('scripts')
 
 </body>

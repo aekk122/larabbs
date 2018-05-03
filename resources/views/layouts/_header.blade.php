@@ -12,7 +12,7 @@
 
 			<!-- Branding Image -->
 			<a href="{{ url('/') }}" class="navbar-brand">
-				LaraBBS
+				Here
 			</a>
 		</div>
 
@@ -25,14 +25,22 @@
 				<li class="{{ active_class((if_route('categories.show') && if_route_param('category', 3)))}}"><a href="{{ route('categories.show', 3) }}">问答</a></li>
 				<li class="{{ active_class((if_route('categories.show') && if_route_param('category', 4)))}}"><a href="{{ route('categories.show', 4) }}">公告</a></li>
 			</ul>
+			<!-- 搜索框 -->
+			<div class="col-sm-4" id="so">  
+	             <div class="input-group search-input">  
+	                 <input type="text" class="form-control" id="search" onblur="search()"/>  
+	                 <span class="input-group-addon"><a href="#"><i class="glyphicon glyphicon-search"> <span >搜索<span class="space" style="white-space:pre;display:inline-block;text-indent:2em;line-height:inherit;"> </span><span class="space" style="white-space:pre;display:inline-block;text-indent:2em;line-height:inherit;"> </span><span class="space" style="white-space:pre;display:inline-block;text-indent:2em;line-height:inherit;"> </span></span></i></a></span>  
+	             </div>  
+			</div>   
+			
 
 			<!-- Right Side of Navbar -->
 			<ul class="nav navbar-nav navbar-right">
 				<!-- Authentication Link -->
 				@guest
 
-					<li><a href="{{ route('login') }}">登录</a></li>
-					<li><a href="{{ route('register') }}">注册</a></li>
+					<li><a href="{{ route('login') }}"><i class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></i> 登录</a></li>
+					<li><a href="{{ route('register') }}"><i class="glyphicon glyphicon-triangle-right"></i> 注册</a></li>
 
 				@else 
 					<li>

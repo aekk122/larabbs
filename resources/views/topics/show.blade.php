@@ -60,7 +60,11 @@
                 @endcan
             </div>
         </div>
-
+        @if(!Auth::check())
+            <div class=" alert alert-warning">
+                登录即可评论
+            </div>
+        @endif
         {{-- 用户回复列表 --}}
         <div class="panel panel-default topic-reply">
             <div class="panel-body">
