@@ -41,6 +41,6 @@ class AuthServiceProvider extends ServiceProvider
             //是否是站长
             return \Auth::check() && \Auth::user()->hasRole('Founder');
         });
-        //
+        
     }
 }

@@ -52,7 +52,9 @@
     			data: formdata,
 				dataType: "json",
 				success: function(msg) {
-					console.log(msg);
+					$.each(msg, function ($k, $v) {
+						console.log($v);
+					});
 				}    			
     		});
     	}
